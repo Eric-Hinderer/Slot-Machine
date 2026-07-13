@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Midnight Fortune | Slots & Blackjack",
-  description: "Polished virtual-credit slots and blackjack games built with Next.js.",
+  title: "Midnight Fortune | Slots, Blackjack & Craps",
+  description: "Polished virtual-credit slots, blackjack, and craps games built with Next.js.",
   icons: {
     icon: "/icon.svg",
   },
