@@ -70,7 +70,7 @@ const SYMBOLS: Record<
 };
 
 const SYMBOL_KEYS = Object.keys(SYMBOLS) as SymbolKey[];
-const BETS = [10, 20, 50, 100];
+const BETS = [10, 20, 50, 100, 250, 500, 1000];
 const PAYLINES = [
   [1, 1, 1, 1, 1],
   [0, 0, 0, 0, 0],
@@ -143,7 +143,7 @@ function formatCredits(value: number): string {
 
 export function SlotMachine() {
   const [grid, setGrid] = useState<SymbolKey[][]>(INITIAL_GRID);
-  const [credits, setCredits] = useState(1000);
+  const [credits, setCredits] = useState(10000);
   const [bet, setBet] = useState(20);
   const [isSpinning, setIsSpinning] = useState(false);
   const [soundOn, setSoundOn] = useState(true);
@@ -281,7 +281,7 @@ export function SlotMachine() {
 
   const refillCredits = () => {
     if (isSpinning) return;
-    setCredits(1000);
+    setCredits(10000);
     setLastPayout(0);
     setWinCells(new Set());
     setMessage("Demo credits refilled. Good luck!");
@@ -488,7 +488,7 @@ export function SlotMachine() {
 
             <button className="refill-button" type="button" onClick={refillCredits} disabled={isSpinning}>
               <span>REFILL</span>
-              <strong>1,000</strong>
+              <strong>10,000</strong>
             </button>
           </div>
         </div>
