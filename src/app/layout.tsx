@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import "./casino.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Midnight Fortune | Slot Machine",
-  description: "A polished virtual-credit slot machine built with Next.js.",
+  title: "Midnight Fortune | Slots & Blackjack",
+  description: "Polished virtual-credit slots and blackjack games built with Next.js.",
   icons: {
     icon: "/icon.svg",
   },
