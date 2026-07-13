@@ -27,51 +27,64 @@
 
 .craps-wrap {
   position: relative;
-  width: min(1040px, 100%);
+  width: min(1180px, 100%);
   margin: 0 auto;
 }
 
 .craps-table {
   position: relative;
   overflow: hidden;
-  padding: 28px;
+  padding: 24px;
   border: 10px solid #241727;
   border-radius: 32px;
   background:
-    radial-gradient(circle at 50% 46%, rgba(255, 218, 114, 0.08), transparent 28rem),
+    radial-gradient(circle at 50% 46%, rgba(255, 218, 114, 0.08), transparent 31rem),
     linear-gradient(145deg, rgba(255, 255, 255, 0.035), transparent 36%),
-    #164f3d;
+    #15503d;
   box-shadow:
     0 35px 90px rgba(0, 0, 0, 0.48),
     inset 0 0 0 2px rgba(255, 218, 114, 0.26),
-    inset 0 0 90px rgba(0, 0, 0, 0.34);
+    inset 0 0 100px rgba(0, 0, 0, 0.38);
 }
 
 .craps-table::before {
   content: "";
   position: absolute;
-  inset: 15px;
+  inset: 13px;
   pointer-events: none;
   border: 1px solid rgba(255, 218, 114, 0.22);
-  border-radius: 19px;
+  border-radius: 20px;
+}
+
+.craps-table-full {
+  display: grid;
+  gap: 11px;
 }
 
 .craps-rail {
   position: relative;
-  z-index: 2;
-  display: flex;
-  justify-content: space-between;
+  z-index: 4;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
   gap: 16px;
-  padding: 2px 5px 24px;
+  min-height: 78px;
+  padding: 0 7px 10px;
 }
 
-.craps-rail > div {
+.craps-rail > div:not(.rail-dice) {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-.craps-rail span {
+.craps-rail > div:last-child {
+  justify-content: flex-end;
+}
+
+.craps-rail span,
+.chip-selector span,
+.clear-bets-button span {
   color: rgba(255, 255, 255, 0.55);
   font-family: var(--font-geist-mono), monospace;
   font-size: 8px;
@@ -79,13 +92,13 @@
   letter-spacing: 0.14em;
 }
 
-.craps-rail strong {
-  min-width: 54px;
+.craps-rail > div:not(.rail-dice) strong {
+  min-width: 64px;
   padding: 8px 10px;
   border: 1px solid rgba(255, 218, 114, 0.24);
   border-radius: 9px;
   color: var(--gold);
-  background: rgba(2, 31, 22, 0.58);
+  background: rgba(2, 31, 22, 0.64);
   font-family: var(--font-geist-mono), monospace;
   font-size: 11px;
   text-align: center;
@@ -94,40 +107,32 @@
 .craps-rail .point-on {
   color: #16101d;
   background: linear-gradient(135deg, var(--gold), #fff0ba);
-  box-shadow: 0 0 24px rgba(255, 218, 114, 0.22);
+  box-shadow: 0 0 24px rgba(255, 218, 114, 0.24);
 }
 
 .craps-rail .point-off {
   color: rgba(255, 255, 255, 0.44);
 }
 
-.dice-stage {
-  position: relative;
-  z-index: 1;
+.rail-dice {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 22px;
-  min-height: 225px;
-  border: 1px solid rgba(255, 255, 255, 0.09);
-  border-radius: 22px;
-  background:
-    radial-gradient(circle at 50% 50%, rgba(156, 120, 255, 0.14), transparent 19rem),
-    rgba(1, 27, 19, 0.46);
+  gap: 8px;
 }
 
 .craps-die {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
-  width: 112px;
-  height: 112px;
-  padding: 17px;
-  border: 1px solid rgba(18, 10, 26, 0.3);
-  border-radius: 20px;
+  width: 58px;
+  height: 58px;
+  padding: 8px;
+  border: 1px solid rgba(18, 10, 26, 0.32);
+  border-radius: 12px;
   background: linear-gradient(145deg, #fffdf6, #e7ded0);
   box-shadow:
-    0 20px 34px rgba(0, 0, 0, 0.32),
+    0 12px 22px rgba(0, 0, 0, 0.3),
     inset 0 2px 2px rgba(255, 255, 255, 0.82),
     inset 0 -3px 5px rgba(62, 33, 16, 0.14);
   transform: rotate(-4deg);
@@ -138,63 +143,53 @@
 }
 
 .craps-die.rolling {
-  animation: diceRoll 150ms linear infinite;
+  animation: diceRoll 145ms linear infinite;
 }
 
 .craps-die span {
   place-self: center;
-  width: 15px;
-  height: 15px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   background: transparent;
 }
 
 .craps-die span.visible {
   background: #271530;
-  box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.46);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.48);
 }
 
-.dice-total {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-width: 68px;
-}
-
-.dice-total span {
-  color: rgba(255, 255, 255, 0.48);
-  font-family: var(--font-geist-mono), monospace;
-  font-size: 8px;
-  font-weight: 800;
-  letter-spacing: 0.15em;
-}
-
-.dice-total strong {
-  margin-top: 6px;
-  color: var(--gold);
-  font-family: var(--font-geist-mono), monospace;
-  font-size: 42px;
-  line-height: 1;
-  text-shadow: 0 0 24px rgba(255, 218, 114, 0.28);
+.rail-total {
+  display: grid;
+  place-items: center;
+  min-width: 38px;
+  height: 38px;
+  border: 1px solid rgba(255, 218, 114, 0.25);
+  border-radius: 50%;
+  color: var(--gold) !important;
+  background: rgba(4, 29, 22, 0.82);
+  font-size: 15px !important;
+  letter-spacing: 0 !important;
 }
 
 .craps-message {
   position: relative;
-  z-index: 2;
+  z-index: 4;
   display: flex;
   align-items: center;
-  min-height: 46px;
-  margin: 14px 0;
-  padding: 0 16px;
+  min-height: 45px;
+  margin: 0;
+  padding: 0 15px;
   border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 13px;
-  background: rgba(2, 29, 21, 0.72);
+  border-radius: 12px;
+  background: rgba(2, 29, 21, 0.76);
+  backdrop-filter: blur(10px);
 }
 
 .craps-message p {
   margin: 0;
-  color: rgba(255, 255, 255, 0.76);
-  font-size: 12px;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 11px;
 }
 
 .craps-message.outcome-win {
@@ -212,71 +207,354 @@
   background: rgba(104, 229, 255, 0.08);
 }
 
-.craps-bet-grid {
+.number-board {
   position: relative;
   z-index: 2;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+  grid-template-columns: repeat(6, minmax(112px, 1fr));
+  gap: 6px;
 }
 
-.craps-bet-grid button {
-  min-height: 86px;
-  padding: 13px;
+.number-column {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 12px;
+  background: rgba(2, 38, 27, 0.68);
+  box-shadow: inset 0 0 22px rgba(0, 0, 0, 0.15);
+}
+
+.number-column.point-number {
+  border-color: rgba(255, 218, 114, 0.72);
+  box-shadow: 0 0 24px rgba(255, 218, 114, 0.14), inset 0 0 22px rgba(255, 218, 114, 0.08);
+}
+
+.number-heading {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 60px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  color: #fff5c9;
+  background:
+    radial-gradient(circle at 50% 0, rgba(255, 218, 114, 0.14), transparent 70%),
+    rgba(255, 255, 255, 0.025);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 31px;
+  font-weight: 900;
+}
+
+.number-heading b {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  padding: 3px 5px;
+  border-radius: 999px;
+  color: #15101b;
+  background: var(--gold);
+  font-size: 6px;
+  letter-spacing: 0.12em;
+}
+
+.craps-bet-spot {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  min-height: 60px;
+  padding: 10px 11px;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 14px;
+  border-radius: 10px;
   color: var(--ink);
   background: rgba(255, 255, 255, 0.035);
   text-align: left;
   cursor: pointer;
-  transition: border-color 160ms ease, background 160ms ease, transform 160ms ease;
+  transition: transform 150ms ease, border-color 150ms ease, background 150ms ease;
 }
 
-.craps-bet-grid button:hover:not(:disabled) {
-  transform: translateY(-2px);
-  border-color: rgba(255, 218, 114, 0.36);
+.craps-bet-spot:hover:not(:disabled) {
+  z-index: 3;
+  transform: translateY(-1px);
+  border-color: rgba(255, 218, 114, 0.46);
+  background: rgba(255, 218, 114, 0.08);
 }
 
-.craps-bet-grid button.selected {
-  border-color: rgba(255, 218, 114, 0.56);
-  background: linear-gradient(145deg, rgba(255, 218, 114, 0.14), rgba(156, 120, 255, 0.08));
-  box-shadow: inset 0 0 22px rgba(255, 218, 114, 0.05);
-}
-
-.craps-bet-grid button:disabled {
-  opacity: 0.58;
+.craps-bet-spot:disabled {
   cursor: not-allowed;
+  opacity: 0.48;
 }
 
-.craps-bet-grid strong,
-.craps-bet-grid span {
+.craps-bet-spot.has-bet {
+  border-color: rgba(255, 218, 114, 0.44);
+  background: linear-gradient(145deg, rgba(255, 218, 114, 0.11), rgba(156, 120, 255, 0.06));
+}
+
+.craps-bet-spot.locked {
+  border-color: rgba(255, 94, 145, 0.42);
+  opacity: 1;
+}
+
+.craps-bet-spot.compact {
+  min-height: 45px;
+  padding: 7px 8px;
+  border-width: 0 0 1px;
+  border-radius: 0;
+  background: rgba(255, 255, 255, 0.018);
+}
+
+.craps-bet-spot.compact:last-child {
+  border-bottom: 0;
+}
+
+.bet-copy {
+  min-width: 0;
+}
+
+.bet-copy strong,
+.bet-copy small {
   display: block;
 }
 
-.craps-bet-grid strong {
+.bet-copy strong {
   font-family: var(--font-geist-mono), monospace;
-  font-size: 10px;
+  font-size: 8px;
+  letter-spacing: 0.08em;
+}
+
+.bet-copy small {
+  margin-top: 4px;
+  color: rgba(255, 255, 255, 0.47);
+  font-size: 7px;
+  line-height: 1.35;
+}
+
+.table-chip {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  min-width: 42px;
+  height: 42px;
+  padding: 0 7px;
+  border: 4px dashed rgba(45, 25, 54, 0.58);
+  border-radius: 50%;
+  color: #211226;
+  background: radial-gradient(circle, #fff1b7 0 47%, #ffca5e 48% 100%);
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.34), inset 0 0 0 2px rgba(255, 255, 255, 0.62);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 7px;
+  font-weight: 900;
+}
+
+.table-chip-small {
+  min-width: 30px;
+  height: 30px;
+  border-width: 3px;
+  font-size: 6px;
+}
+
+.contract-tag {
+  position: absolute;
+  right: 8px;
+  bottom: 4px;
+  color: var(--pink);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 5px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+}
+
+.travel-bet {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 38px;
+  padding: 5px 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.68);
+  background: rgba(104, 229, 255, 0.035);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 7px;
+  font-weight: 900;
   letter-spacing: 0.1em;
 }
 
-.craps-bet-grid span {
-  margin-top: 7px;
-  color: var(--muted);
-  font-size: 9px;
-  line-height: 1.45;
+.dont-travel {
+  color: rgba(255, 190, 207, 0.76);
+  background: rgba(255, 94, 145, 0.035);
+}
+
+.line-layout {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 0.82fr 1.18fr;
+  gap: 7px;
+}
+
+.line-layout .craps-bet-spot {
+  min-height: 76px;
+  border-radius: 13px;
+}
+
+.dont-come-box {
+  border-color: rgba(255, 94, 145, 0.2);
+}
+
+.come-box {
+  border-color: rgba(104, 229, 255, 0.2);
+}
+
+.center-action {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 0.75fr 1.25fr;
+  gap: 7px;
+}
+
+.hardway-grid,
+.proposition-grid {
+  display: grid;
+  gap: 5px;
+}
+
+.hardway-grid {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.proposition-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.hardway-grid .craps-bet-spot,
+.proposition-grid .craps-bet-spot {
+  min-height: 57px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+.hardway-grid .craps-bet-spot {
+  background: rgba(156, 120, 255, 0.05);
+}
+
+.proposition-grid .craps-bet-spot {
+  background: rgba(255, 94, 145, 0.04);
+}
+
+.field-box {
+  z-index: 2;
+  min-height: 79px;
+  border-color: rgba(255, 218, 114, 0.3);
+  border-radius: 14px;
+  background:
+    linear-gradient(90deg, rgba(255, 218, 114, 0.06), transparent 35%, rgba(255, 218, 114, 0.06)),
+    rgba(255, 255, 255, 0.025);
+}
+
+.field-box .bet-copy strong {
+  color: var(--gold);
+  font-size: 16px;
+  letter-spacing: 0.18em;
+}
+
+.contract-lines {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  gap: 6px;
+}
+
+.contract-row {
+  display: grid;
+  grid-template-columns: 1fr minmax(150px, 0.28fr);
+  gap: 6px;
+}
+
+.contract-row .craps-bet-spot {
+  min-height: 66px;
+  border-radius: 12px;
+}
+
+.dont-pass-row > .craps-bet-spot:first-child {
+  border-color: rgba(255, 94, 145, 0.28);
+}
+
+.pass-row > .craps-bet-spot:first-child {
+  border-color: rgba(255, 218, 114, 0.4);
+  background: rgba(255, 218, 114, 0.045);
 }
 
 .craps-controls {
   display: grid;
-  grid-template-columns: minmax(130px, 1fr) minmax(170px, 1fr) minmax(190px, 1.2fr) minmax(110px, 0.8fr);
+  grid-template-columns: minmax(130px, 1fr) minmax(150px, 0.9fr) minmax(160px, 0.95fr) minmax(180px, 1.1fr) minmax(140px, 0.9fr) minmax(110px, 0.7fr);
   align-items: center;
-  gap: 16px;
-  margin-top: 18px;
-  padding: 20px;
+  gap: 10px;
+  margin-top: 16px;
+  padding: 16px;
   border: 1px solid rgba(255, 255, 255, 0.11);
-  border-radius: 22px;
+  border-radius: 21px;
   background: linear-gradient(180deg, rgba(27, 19, 42, 0.96), rgba(10, 7, 17, 0.98));
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+}
+
+.chip-selector {
+  display: grid;
+  grid-template-columns: 38px 1fr 38px;
+  align-items: center;
+  min-height: 64px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.025);
+  text-align: center;
+}
+
+.chip-selector button {
+  align-self: stretch;
+  border: 0;
+  color: var(--ink);
+  background: transparent;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.chip-selector button:disabled {
+  opacity: 0.25;
+}
+
+.chip-selector strong {
+  display: block;
+  margin-top: 5px;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 18px;
+}
+
+.bet-mode {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 64px;
+  padding: 5px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.bet-mode button {
+  border: 0;
+  border-radius: 10px;
+  color: var(--muted);
+  background: transparent;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+}
+
+.bet-mode button.active {
+  color: #19101d;
+  background: linear-gradient(135deg, var(--gold), var(--pink));
 }
 
 .roll-button {
@@ -290,17 +568,20 @@
 }
 
 .roll-button:disabled {
-  filter: saturate(0.5);
-  cursor: wait;
+  filter: saturate(0.45);
+  opacity: 0.52;
+  cursor: not-allowed;
 }
 
 .roll-button span,
-.roll-button small {
+.roll-button small,
+.clear-bets-button span,
+.clear-bets-button strong {
   display: block;
 }
 
 .roll-button span {
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 900;
 }
 
@@ -312,8 +593,32 @@
   letter-spacing: 0.14em;
 }
 
+.clear-bets-button {
+  min-height: 64px;
+  padding: 0 13px;
+  border: 1px solid rgba(104, 229, 255, 0.2);
+  border-radius: 14px;
+  color: var(--ink);
+  background: rgba(104, 229, 255, 0.045);
+  text-align: left;
+  cursor: pointer;
+}
+
+.clear-bets-button strong {
+  margin-top: 5px;
+  color: var(--cyan);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 14px;
+}
+
+.clear-bets-button:disabled {
+  opacity: 0.34;
+  cursor: not-allowed;
+}
+
 .craps-lower-grid {
-  grid-template-columns: minmax(0, 1.45fr) minmax(270px, 0.75fr);
+  width: min(1180px, 100%);
+  grid-template-columns: minmax(0, 1.5fr) minmax(300px, 0.72fr);
 }
 
 .craps-rules-card {
@@ -322,14 +627,14 @@
 
 .craps-rules-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 9px;
   margin-top: 20px;
 }
 
 .craps-rules-grid > div {
-  min-height: 125px;
-  padding: 16px;
+  min-height: 126px;
+  padding: 15px;
   border: 1px solid var(--line);
   border-radius: 14px;
   background: rgba(255, 255, 255, 0.025);
@@ -343,7 +648,7 @@
 .craps-rules-grid strong {
   color: var(--gold);
   font-family: var(--font-geist-mono), monospace;
-  font-size: 18px;
+  font-size: 13px;
 }
 
 .craps-rules-grid span {
@@ -353,20 +658,41 @@
   line-height: 1.5;
 }
 
+.craps-history-card .history-list {
+  max-height: 360px;
+  overflow: auto;
+}
+
 @keyframes diceRoll {
   0% { transform: translate(-2px, -3px) rotate(-10deg) scale(0.98); }
   50% { transform: translate(3px, 2px) rotate(12deg) scale(1.03); }
   100% { transform: translate(-2px, -3px) rotate(-10deg) scale(0.98); }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1080px) {
+  .number-board {
+    overflow-x: auto;
+    grid-template-columns: repeat(6, minmax(130px, 1fr));
+    padding-bottom: 5px;
+  }
+
   .craps-controls {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
   }
 
   .roll-button {
     grid-column: 1 / -1;
     grid-row: 1;
+  }
+}
+
+@media (max-width: 850px) {
+  .center-action {
+    grid-template-columns: 1fr;
+  }
+
+  .craps-rules-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .craps-lower-grid {
@@ -374,112 +700,60 @@
   }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 680px) {
   .craps-table {
-    padding: 20px 14px;
+    padding: 14px 9px;
     border-width: 7px;
     border-radius: 23px;
   }
 
   .craps-rail {
-    align-items: flex-start;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    min-height: auto;
   }
 
-  .craps-rail > div {
-    display: grid;
-    gap: 6px;
-  }
-
-  .dice-stage {
-    min-height: 185px;
-    gap: 13px;
+  .rail-dice {
+    grid-column: 1 / -1;
+    grid-row: 1;
   }
 
   .craps-die {
-    width: 84px;
-    height: 84px;
-    padding: 12px;
-    border-radius: 15px;
+    width: 50px;
+    height: 50px;
   }
 
-  .craps-die span {
-    width: 11px;
-    height: 11px;
-  }
-
-  .dice-total {
-    min-width: 48px;
-  }
-
-  .dice-total strong {
-    font-size: 32px;
-  }
-
-  .craps-bet-grid {
+  .line-layout {
     grid-template-columns: 1fr;
   }
 
-  .craps-bet-grid button {
-    min-height: 70px;
+  .proposition-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .contract-row {
+    grid-template-columns: 1fr;
+  }
+
+  .field-box .bet-copy strong {
+    font-size: 13px;
   }
 
   .craps-controls {
-    gap: 9px;
-    padding: 13px;
+    grid-template-columns: 1fr 1fr;
+    padding: 11px;
   }
 
-  .craps-controls .refill-button {
+  .roll-button {
+    grid-column: 1 / -1;
+  }
+
+  .clear-bets-button,
+  .refill-button {
     grid-column: 1 / -1;
   }
 
   .craps-rules-grid {
     grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 470px) {
-  .casino-tabs {
-    width: calc(100% - 20px);
-    justify-content: center;
-  }
-
-  .casino-tabs button {
-    flex: 1;
-    justify-content: center;
-    gap: 4px;
-    padding: 0 7px;
-    font-size: 7px;
-  }
-
-  .casino-tabs button span {
-    font-size: 12px;
-  }
-
-  .craps-rail strong {
-    min-width: 46px;
-    font-size: 9px;
-  }
-
-  .dice-stage {
-    gap: 8px;
-  }
-
-  .craps-die {
-    width: 70px;
-    height: 70px;
-    padding: 10px;
-  }
-
-  .craps-die span {
-    width: 9px;
-    height: 9px;
-  }
-
-  .dice-total strong {
-    font-size: 27px;
-  }
-
-  .craps-message p {
-    font-size: 10px;
   }
 }
