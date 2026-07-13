@@ -1,10 +1,14 @@
 # Midnight Fortune Casino
 
-A responsive, virtual-credit casino built with Next.js, React, and TypeScript. The app includes three games that share one locally saved 10,000-credit balance:
+A responsive virtual-credit casino built with Next.js, React, and TypeScript.
 
-- **Slots:** five reels, five paylines, wild substitutions, adjustable bets up to 1,000 credits, sound, and recent-spin history.
-- **Blackjack:** hit, stand, double down, dealer stands on all 17, blackjack pays 3:2, and recent-hand history.
-- **Craps:** Pass Line, Don't Pass, and Field bets with point-on/point-off play and recent-roll history.
+## Games
+
+- **Slots:** five animated reels, five paylines, wild substitutions, seven bet levels, recent-spin history, sound, and keyboard controls.
+- **Blackjack:** hit, stand, double down, dealer stands on 17, natural blackjack pays 3:2, and recent-hand history.
+- **Craps:** a full chip-on-table layout with simultaneous Pass/Don't Pass, Come/Don't Come, true odds, place bets, hardways, Field bets, and center proposition bets.
+
+All games use one shared virtual-credit wallet saved in local storage. There are no deposits, withdrawals, purchases, or real-money rewards.
 
 ## Run locally
 
@@ -24,12 +28,26 @@ npm start
 
 ## Deploy on Vercel
 
-Import this GitHub repository into Vercel. The framework preset will be detected as Next.js and no environment variables are required.
+Import this GitHub repository into Vercel. The framework preset is Next.js and no environment variables are required.
 
-## Keyboard controls
+## Controls
 
-- **Slots:** `Space` spins; left/right arrows change the wager.
-- **Blackjack:** `H` hits, `S` stands, `D` doubles, and `Space` or `Enter` deals when the hand is settled.
-- **Craps:** `Space` or `Enter` rolls; left/right arrows change the wager.
+### Slots
 
-The project uses virtual credits only and does not support deposits, withdrawals, or real-money wagering.
+- `Space`: spin
+- `Left` / `Right`: change bet
+
+### Blackjack
+
+- `H`: hit
+- `S`: stand
+- `D`: double down
+- `Space` / `Enter`: deal
+
+### Craps
+
+- Select a chip and click table spots to place bets.
+- Switch to **Remove** and click permitted bets to take chips down.
+- `Space` / `Enter`: roll
+- `Left` / `Right`: change chip
+- `R`: toggle place/remove mode
